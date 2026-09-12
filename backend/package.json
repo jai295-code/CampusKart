@@ -1,0 +1,26 @@
+{
+  "name": "campuskart-backend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CampusKart REST API - campus-only marketplace",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "5.22.0",
+    "bcryptjs": "2.4.3",
+    "dotenv": "16.4.7",
+    "express": "4.22.2",
+    "jsonwebtoken": "9.0.2",
+    "multer": "2.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "3.1.9",
+    "prisma": "5.22.0"
+  }
+}

@@ -1,0 +1,45 @@
+// CampusKart data model.
+// See .kiro/specs/campus-marketplace/design.md -> Data Models.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  // One-line switch to "postgresql" later, plus a new DATABASE_URL.
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int       @id @default(autoincrement())
+  name         String
+  email        String    @unique
+  hostel       String
+  phone        String
+  passwordHash String
+  // MVP default. Sign-up is open, so the badge is not an identity check yet.
+  verified     Boolean   @default(true)
+  avatarUrl    String?
+  createdAt    DateTime  @default(now())
+  listings     Listing[]
+}
+
+model Listing {
+  id            Int      @id @default(autoincrement())
+  title         String
+  description   String
+  category      String
+  // Whole rupees. 0 is valid and means the item is free.
+  price         Int
+  negotiable    Boolean  @default(false)
+  condition     String
+  coverImageUrl String
+  // JSON-encoded array of extra image URLs; SQLite has no array type.
+  images        String   @default("[]")
+  status        String   @default("active")
+  views         Int      @default(0)
+  createdAt     DateTime @default(now())
+  seller        User     @relation(fields: [sellerId], references: [id])
+  sellerId      Int
+}
